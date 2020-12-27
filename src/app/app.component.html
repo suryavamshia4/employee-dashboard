@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 py-5">
+      <h1 class="text-center cadet">Employee Dashboard</h1> 
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr class="text-center">
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Occupation</th>
+            <th>Edit/Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees" class="text-center">
+            <td>{{ employee.employeeId }}</td>
+            <td>{{ employee.firstName }}</td>
+            <td>{{ employee.lastName }}</td>
+            <td>{{ employee.occupation }}</td>
+            <td>
+              <button type="button" class="btn btn-info btn-sm cadet mr-2" (click)="showEditEmployeeApp(employee)">Edit</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeEmployee(employee)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success cadet" (click)="showAddEmployeeApp()">Add New Employee</button>
+
+      <div class="py-5">
+        <form *ngIf="employeeApp">
+          <h2>Add New Employee</h2>
+          <p>Employee First Name: <input type="text" name="firstName" [(ngModel)]="newEmployee.firstName" /></p>
+          <p>Employee Last Name: <input type="text" name="lastName" [(ngModel)]="newEmployee.lastName" /></p>
+          <p>Employee Occupation: <input type="text" name="occupation" [(ngModel)]="newEmployee.occupation" /></p>
+          <p>
+            <button type="button" class="btn btn-primary cadet mr-2" (click)="saveEmployee(newEmployee)">Submit</button>
+            <button type="button" class="btn btn-warning" (click)="cancelNewEmployee()">Cancel</button>
+          </p>
+        </form>
+
+        <form *ngIf="editEmployeeApp">
+          <h2>Edit Employee Details</h2>
+          <p>First Name: <input type="text" name="firstName" [(ngModel)]="editedEmployee.firstName" /></p>
+          <p>Last Name: <input type="text" name="lastName" [(ngModel)]="editedEmployee.lastName" /></p>
+          <p>Occupation: <input type="text" name="occupation" [(ngModel)]="editedEmployee.occupation" /></p>
+          <p>
+            <button type="button" class="btn btn-primary mr-2 cadet" (click)="updateEmployee()">Submit</button>
+            <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
